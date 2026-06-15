@@ -121,7 +121,6 @@ class HyenaModel(nn.Module):
         kernel_size, dilation = self._compute_kernel_params()
         self.kernel_size = kernel_size
         self.dilation = dilation
-        self.padding_mode = 'reflect' if config.prefer_reflect else 'zeros'
         
         self.layers = nn.ModuleList([HyenaLayer(config) for _ in range(config.n_layers)])
         self.final_ln = nn.LayerNorm(config.d_model)

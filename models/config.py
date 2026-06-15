@@ -16,6 +16,7 @@ class ModelConfig:
     attn_dropout: float = 0.1
     prefer_reflect: bool = False
     gradient_checkpointing: bool = False
+    padding_mode: str = 'zeros'
     
     def __post_init__(self):
         if self.dim_feedforward is None:
@@ -27,3 +28,6 @@ class ModelConfig:
                 if self.d_model % h == 0:
                     self.n_heads = h
                     break
+        
+        if self.prefer_reflect:
+            self.padding_mode = 'reflect'
